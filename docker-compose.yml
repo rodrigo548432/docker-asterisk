@@ -1,0 +1,19 @@
+version: "3"
+services:
+  docker-asterisk:
+    container_name: docker-asterisk
+    image: docker-asterisk
+    ipc: private
+    logging:
+      driver: json-file
+      options: {}
+    ports:
+      - 30000-30050:30000-30050/udp
+      - 5600:5060/udp
+    restart: unless-stopped
+    volumes:
+      - ./asterisk:/etc/asterisk
+    working_dir: /etc/asterisk
+networks:
+  bridge:
+    external: true
